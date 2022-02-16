@@ -1,0 +1,103 @@
+﻿@using AngelusTBlog.Enums
+@using AngelusTBlog.Services
+@model AngelusTBlog.Models.Post
+@inject IImageService imageService
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<div class="page-title-area bg-8 mt-4 mb-4 d-flex justify-content-center">
+    <div class="container">
+        <div class="page-title-content">
+            <h2>@ViewData["Title"] Post</h2>
+
+            <div class="col-md-12 p-4">
+                <form asp-action="Edit" enctype="multipart/form-data">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="Id" />
+                    <div class="form-group mb-3">
+                        <label asp-for="BlogId" class="control-label"></label>
+                        <select asp-for="BlogId" class="form-control" asp-items="ViewBag.BlogId"></select>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label asp-for="Title" class="control-label mt-3"></label>
+                        <input asp-for="Title" class="form-control" />
+                        <span asp-validation-for="Title" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label asp-for="Summary" class="control-label"></label>
+                        <textarea asp-for="Summary" class="form-control"></textarea>
+                        <span asp-validation-for="Summary" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label asp-for="Content" class="control-label"></label>
+                        <textarea asp-for="Content" class="form-control"></textarea>
+                        <span asp-validation-for="Content" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label asp-for="ReadyStatus" class="control-label"></label>
+                        <select asp-for="ReadyStatus" asp-items="@Html.GetEnumSelectList<ReadyStatus>()" class="form-control"></select>
+                        <span asp-validation-for="ReadyStatus" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-3">
+                        <img class="img-fluid mt-3 mb-3" width="300" src="@imageService.DecodeImage(@Model.ImageData, @Model.ImageType)" />
+                        <input asp-for="Image" name="NewImage" type="file" class="form-control" />
+                        <span asp-validation-for="Image" class="text-danger"></span>
+                    </div>
+                    <!-- Tags -->
+                    <div class="form-group vstack gap-2 col-lg-9 mx-auto">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col text-left">
+                                    <h3 class="control-label">Manage Tags</h3>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col">
+
+                                    <!-- Enter new Tags -->
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <input type="text" class="form-control" id="TagEntry" />
+                                        </div>
+                                    </div>
+
+                                    <!-- Add and remove tags button -->
+                                    <div class="row">
+                                        <div class="col-lg-6 d-grid gap-1 mt-2">
+                                            <button onclick="AddTag()" class="default-btn btn-two" type="button" id="add">Add</button>
+                                        </div>
+                                        <div class="col-lg-6 d-grid gap-1 mt-2">
+                                            <button onclick="DeleteTag()" class="default-btn btn-two" type="button" id="delete">Delete</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-7">
+                                    <select multiple class="form-select d-grid d-md-block" name="TagValues" id="TagList"></select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group mt-3">
+                        <button type="submit" class="default-btn btn-two">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+
+    <!-- Tags JS -->
+    <script src="~/js/tags.js"></script>
+
+}
+<script> let tagValues = "@ViewData["TagValues"]"; </script>

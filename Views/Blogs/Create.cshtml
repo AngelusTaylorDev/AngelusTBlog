@@ -1,0 +1,42 @@
+﻿@model AngelusTBlog.Models.Blog
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<div class="page-title-area bg-8 mt-4 mb-4 d-flex justify-content-center">
+    <div class="container">
+        <div class="page-title-content">
+            <h2>@ViewData["Title"] Blog</h2>
+
+            <div class="col-md-12 p-4">
+                <form asp-action="Create" enctype="multipart/form-data">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group mb-3">
+                        <input asp-for="Name" class="form-control" placeholder="Name"/>
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-3">
+                        <textarea asp-for="Description" class="form-control" placeholder="Description" ></textarea>
+                        <span asp-validation-for="Description" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label asp-for="Image" class="control-label "></label>
+                        <input type="file" asp-for="Image" class="form-control" accept=".png, .gif, .jpeg, .jpg" />
+                        <span asp-validation-for="Image" class="text-danger"></span>
+                    </div>
+                    <div class="form-group p-3">
+                        <button type="submit" value="Create" class="default-btn btn-two">Create</button>
+                        <button asp-controller="Blogs" asp-action="Index" class="default-btn btn-two">Back to Blogs</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+}
+}

@@ -1,0 +1,90 @@
+﻿@page
+@model LoginModel
+
+@{
+    ViewData["Title"] = "Log in";
+}
+
+<!-- Start Page Title Area -->
+<div class="page-title-area bg-7">
+    <div class="container">
+        <div class="page-title-content">
+            <h1>@ViewData["Title"]</h1>
+        </div>
+    </div>
+</div>
+<!-- End Page Title Area -->
+<!-- Start Log In Area -->
+<div class="user-area-all-style log-in-area ptb-100">
+    <div class="container">
+        <div class="contact-form-action">
+            <form id="account" method="post">
+
+                <h4 class="text-center">Use another service to log in.</h4>
+                <hr />
+                <div asp-validation-summary="All" class="text-danger"></div>
+
+                <div class="row">
+                    <div class="col-lg-4 col-md-4 col-sm-12">
+                        <button class="default-btn" type="submit">
+                            Google
+                        </button>
+                    </div>
+
+                    <div class="col-lg-4 col-md-4 col-sm-12">
+                        <button class="default-btn" type="submit">
+                            Facebook
+                        </button>
+                    </div>
+
+                    <div class="col-lg-4 col-md-4 col-sm-12">
+                        <button class="default-btn" type="submit">
+                            Twitter
+                        </button>
+                    </div>
+
+                    <div class="col-12">
+                        <input asp-for="Input.Email" class="form-control" placeholder="Username or Email" />
+                        <span asp-validation-for="Input.Email" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <input asp-for="Input.Password" class="form-control" placeholder="Password" />
+                        <span asp-validation-for="Input.Password" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-lg-6 col-sm-6 form-condition">
+                        <div class="agree-label">
+                            <label asp-for="Input.RememberMe">
+                                <input asp-for="Input.RememberMe" />
+                                @Html.DisplayNameFor(m => m.Input.RememberMe)
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 col-sm-6">
+                        <a class="forget" asp-area="Identity" asp-page="/Account/ForgotPassword">Forgot my password?</a>
+                    </div>
+
+                    <div class="col-12">
+                        <button class="default-btn btn-two" type="submit">
+                            Log In Now
+                        </button>
+                    </div>
+
+                    <div class="col-12">
+                        <p class="account-desc">
+                            Not a member?
+                            <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register</a>
+                        </p>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- End Log In Area -->
+<!-- Scripts -->
+@section Scripts {
+<partial name="_ValidationScriptsPartial" />
+}

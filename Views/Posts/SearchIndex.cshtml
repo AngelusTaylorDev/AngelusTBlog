@@ -1,0 +1,77 @@
+﻿@using AngelusTBlog.Models
+@using AngelusTBlog.Services
+@using AngelusTBlog.Enums
+@using X.PagedList
+@using X.PagedList.Mvc.Core
+@using X.PagedList.Web.Common
+
+@inject IImageService imageService
+@model IPagedList<Post>
+
+
+@{
+    ViewData["Title"] = "Search Results";
+}
+
+
+<!-- Start Search Area -->
+<section class="latest-project-area pb-70">
+    <div class="container">
+        <div class="section-title text-center">
+            <h2 class="p-3 mt-4">Search Results</h2>
+        </div>
+        <div class="row">
+            @foreach (var post in Model)
+            {
+                <div class="card col-lg-3 col-md-6 m-2" style="width: 25rem;">
+                    <div class="single-featured p-4">
+                        <a href="post-style-one.html">
+                            <img class="card-img-top blogImage" src="@imageService.DecodeImage(post.ImageData, post.ImageType)" alt="Image">
+                        </a>
+                        <div class="card-body">
+                            <div class="featured-content">
+                                <ul>
+                                    <li>
+                                        <a asp-action="Details" asp-route-id="@post.AuthorID" class="admin">
+                                            <i class="bx bx-user"></i>
+                                            @post.Author.FullName
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <i class="bx bx-calendar"></i>
+                                        @post.Created.ToString("MMM dd, yyyy")
+                                    </li>
+                                </ul>
+
+                                <a class="card-title" asp-action="Details" asp-route-slug="@post.Slug">
+                                    <h5>@post.Title</h5>
+                                </a>
+
+                                <p class="card-text">@post.Summary</p>
+                                <a class="read-more" asp-action="Details" asp-route-slug="@post.Slug">Read More</a> 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+<!-- End Search Area -->
+
+<!-- Visual Paging control -->
+<div class="row">
+    <div class="col h3">
+        Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+    </div>
+</div>
+<div class="row">
+    <div class="col pb-3">
+        @Html.PagedListPager(Model, page => Url.Action("SearchIndex", new { page = page, searchTerm = ViewData["SearchTerm"] }),
+            new PagedListRenderOptionsBase
+            {
+                LiElementClasses = new string[] { "page-item" },
+                PageClasses = new string[] { "page-link" }
+            })
+    </div>
+</div>

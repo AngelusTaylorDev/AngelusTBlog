@@ -1,0 +1,315 @@
+﻿@using AngelusTBlog.Models
+@using X.PagedList
+@using X.PagedList.Mvc.Core
+@using X.PagedList.Web.Common
+@using AngelusTBlog.Services
+@model IPagedList<Blog>
+@inject IImageService imageService
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+
+<!-- Start Banner Area -->
+<section class="banner-area">
+    <div class="container">
+        <div class="banner-text">
+            <h1>Angelus T Blog</h1>
+
+            <ul>
+                <li>
+                    <a href="#"><i class="bx bxl-facebook"></i></a>
+                </li>
+                <li>
+                    <a href="#"><i class="bx bxl-twitter"></i></a>
+                </li>
+                <li>
+                    <a href="#"><i class="bx bxl-instagram"></i></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</section>
+<!-- End Banner Area -->
+<!-- Start Main Blog Area -->
+<div class="row">
+    <div class="col-lg-5 plr-5">
+        <div class="single-main-blog-item-two bg-1">
+            <span class="blog-link">
+                Interview Prep
+            </span>
+
+            <div class="main-blog-content">
+                <a asp-controller="Blogs" asp-action="Details" asp-route-id="2">
+                    <h3>Coding Interview Prep</h3>
+                </a>
+
+                <ul>
+                    <li>
+                        <a href="#" class="admin">
+                            <i class="bx bx-user"></i>
+                            By Angelus Taylor
+                        </a>
+                    </li>
+                    <li>
+                        <i class="bx bx-calendar"></i>
+                        25 Feb 2022
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-2">
+        <div class="row">
+            <div class="col-lg-12 col-md-6 plr-5">
+                <div class="single-main-blog-item-two middle mb-8">
+                    <img src="~/img/home-two/Data-structures.jpg" alt="Image">
+                    <span class="blog-link">
+                        Data structures
+                    </span>
+
+                    <div class="main-blog-content">
+                        <a asp-controller="Blogs" asp-action="Details" asp-route-id="3">
+                            <h3>Master Data structures</h3>
+                        </a>
+
+                        <ul>
+                            <li>
+                                <a href="#" class="admin">
+                                    <i class="bx bx-user"></i>
+                                    By Angelus Taylor
+                                </a>
+                            </li>
+                            <li>
+                                <i class="bx bx-calendar"></i>
+                                10 Mar 2022
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-12 col-md-6 plr-5">
+                <div class="single-main-blog-item-two middle">
+                    <img src="~/img/home-two/coding.jpg" alt="Image">
+                    <span class="blog-link">
+                        Challenges
+                    </span>
+
+                    <div class="main-blog-content mt-3">
+                        <a asp-controller="Blogs" asp-action="Details" asp-route-id="4">
+                            <h3>Coding Challenges</h3>
+                        </a>
+
+                        <ul>
+                            <li>
+                                <a href="#" class="admin">
+                                    <i class="bx bx-user"></i>
+                                    By Angelus Taylor
+                                </a>
+                            </li>
+                            <li>
+                                <i class="bx bx-calendar"></i>
+                                2 Mar 2022
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-5 plr-5">
+        <div class="single-main-blog-item-two bg-4">
+            <span class="blog-link">
+                Algorithms Study
+            </span>
+
+            <div class="main-blog-content">
+                <a asp-controller="Blogs" asp-action="Details" asp-route-id="1">
+                    <h3>Finally Understand Algorithms</h3>
+                </a>
+
+                <ul>
+                    <li>
+                        <a href="#" class="admin">
+                            <i class="bx bx-user"></i>
+                            By Angelus Taylor
+                        </a>
+                    </li>
+                    <li>
+                        <i class="bx bx-calendar"></i>
+                        15 Mar 2022
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Main Blog Area -->
+<!-- Start Latest Project Area -->
+<section class="latest-project-area pb-70">
+    <div class="container">
+        <div class="section-title text-center">
+            <h2 class="p-3 mt-4">Latest Posts</h2>
+        </div>
+
+        <div class="row">
+
+            @foreach (var blog in Model)
+            {
+                <div class="col-lg-4 col-md-6 text-center">
+                    <div class="single-featured">
+                        <a href="post-style-one.html">
+                            <img class="blogImage" src="@imageService.DecodeImage(blog.ImageData, blog.ImageType)" alt="Image">
+                        </a>
+
+                        <div class="featured-content">
+                            <ul>
+                                <li>
+                                    <a href="#" class="admin">
+                                        <i class="bx bx-user"></i>
+                                        Admin By @blog.Author
+                                    </a>
+                                </li>
+                                <li>
+                                    <i class="bx bx-calendar"></i>
+                                    @blog.Created
+                                </li>
+                            </ul>
+
+                            <a href="post-style-one.html">
+                                <h5>@blog.Name</h5>
+                            </a>
+
+                            <p>@blog.Description.ToString()</p>
+
+                            <a asp-controller="Posts" asp-action="BlogPostIndex" asp-route-id="@blog.Id" class="read-more">Read More</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+
+        <!-- Visual Paging control -->
+        <div class="row">
+            <div class="col">
+                Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                @Html.PagedListPager(Model, page => Url.Action("Index", new {page = page }),
+                new PagedListRenderOptionsBase
+                {
+                LiElementClasses = new string[] {"page-item"},
+                PageClasses = new string[] {"page-link"}
+                })
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Latest Project Area -->
+<!-- Start Latest Project Area -->
+@*<section class="latest-project-area pb-70">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-md-6">
+                <div class="single-featured">
+                    <a href="post-style-one.html">
+                        <img src="assets/img/home-two/technology-img/1.jpg" alt="Image">
+                    </a>
+
+                    <div class="featured-content">
+                        <ul>
+                            <li>
+                                <a href="#" class="admin">
+                                    <i class="bx bx-user"></i>
+                                    Admin By Jhona Walker
+                                </a>
+                            </li>
+                            <li>
+                                <i class="bx bx-calendar"></i>
+                                25 Jun 2020
+                            </li>
+                        </ul>
+
+                        <a href="post-style-one.html">
+                            <h3>Developing Self-Control Through The Wonders of Intermittent Fasting</h3>
+                        </a>
+
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere laboriosam eveniet debitis tenetur, eaque aliquid recusandae expedita. Porro dicta delectus</p>
+
+                        <a href="post-style-one.html" class="read-more">Read More</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6">
+                <div class="single-featured">
+                    <a href="post-style-one.html">
+                        <img src="assets/img/home-two/technology-img/2.jpg" alt="Image">
+                    </a>
+
+                    <div class="featured-content">
+                        <ul>
+                            <li>
+                                <a href="#" class="admin">
+                                    <i class="bx bx-user"></i>
+                                    Admin By Kilva Walker
+                                </a>
+                            </li>
+                            <li>
+                                <i class="bx bx-calendar"></i>
+                                26 Jun 2020
+                            </li>
+                        </ul>
+
+                        <a href="post-style-one.html">
+                            <h3>The Argument For Short Meditations Every Life</h3>
+                        </a>
+
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere laboriosam eveniet debitis tenetur, eaque aliquid recusandae expedita. Porro dicta delectus</p>
+
+                        <a href="post-style-one.html" class="read-more">Read More</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 offset-md-3 offset-lg-0">
+                <div class="single-featured">
+                    <a href="post-style-one.html">
+                        <img src="assets/img/home-two/technology-img/3.jpg" alt="Image">
+                    </a>
+
+                    <div class="featured-content">
+                        <ul>
+                            <li>
+                                <a href="#" class="admin">
+                                    <i class="bx bx-user"></i>
+                                    Admin By Jexk Walker
+                                </a>
+                            </li>
+                            <li>
+                                <i class="bx bx-calendar"></i>
+                                27 Jun 2020
+                            </li>
+                        </ul>
+
+                        <a href="post-style-one.html">
+                            <h3>No Fixed Abode: Quitting Home Ownership</h3>
+                        </a>
+
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere laboriosam eveniet debitis tenetur, eaque aliquid recusandae expedita. Porro dicta delectus</p>
+
+                        <a href="post-style-one.html" class="read-more">Read More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>*@
+<!-- End Latest Project Area -->

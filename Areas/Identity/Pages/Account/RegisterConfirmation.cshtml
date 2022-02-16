@@ -1,0 +1,30 @@
+﻿@page
+@model RegisterConfirmationModel
+@{
+    ViewData["Title"] = "Register confirmation";
+}
+
+@{
+    if (@Model.DisplayConfirmAccountLink)
+    {
+        <p>
+            This app does not currently have a real email sender registered, see <a href="https://aka.ms/aspaccountconf">these docs</a> for how to configure a real email sender.
+            Normally this would be emailed:
+        </p>
+    }
+    else
+    {
+        <div class="page-title-area bg-8 mt-4" id="confirmation">
+            <div class="container">
+                <div class="page-title-content">
+                    <h1>@ViewData["Title"]</h1>
+                    <h3>Please check your email to confirm your account.</h3>
+                    <h5 class="account-desc">
+                        Resend email confirmation
+                        <a asp-area="Identity" asp-page="/Account/ResendEmailConfirmation" hid="resend-confirmation">Resend</a>
+                    </h5>
+                </div>
+            </div>
+        </div>
+    }
+}

@@ -1,0 +1,230 @@
+﻿@page
+@model RegisterModel
+@{
+    ViewData["Title"] = "Register";
+}
+
+<!-- Start Page Title Area -->
+<div class="page-title-area bg-7">
+    <div class="container">
+        <div class="page-title-content">
+            <h1>@ViewData["Title"]</h1>
+        </div>
+    </div>
+</div>
+<!-- End Page Title Area -->
+<!-- Start Sign Up Area -->
+<div class="user-area-all-style sign-up-area ptb-100">
+    <div class="container">
+        <div class="row">
+            <div class="contact-form-action col-lg-8">
+                <form asp-route-returnUrl="@Model.ReturnUrl" method="post" enctype="multipart/form-data">
+                    <div class="row">
+                        <div class="col-lg-4 col-md-4 col-sm-12">
+                            <button class="default-btn" type="submit">
+                                Google
+                            </button>
+                        </div>
+
+                        <div class="col-lg-4 col-md-4 col-sm-12">
+                            <button class="default-btn" type="submit">
+                                Facebook
+                            </button>
+                        </div>
+
+                        <div class="col-lg-4 col-md-4 col-sm-12">
+                            <button class="default-btn" type="submit">
+                                Twitter
+                            </button>
+                        </div>
+
+                        <div class="col-md-12 col-sm-12">
+                            <div class="form-group">
+                                <input asp-for="Input.FirstName" class="form-control" type="text" placeholder="First Name">
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 col-sm-12 ">
+                            <div class="form-group">
+                                <input asp-for="Input.LastName" class="form-control" type="text" placeholder="Last Name">
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 col-sm-12">
+                            <div class="form-group">
+                                <input asp-for="Input.DisplayName" class="form-control" type="text" placeholder="Enter your Username">
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 col-sm-12">
+                            <div class="form-group">
+                                <input asp-for="Input.Email" class="form-control" type="email" placeholder="Email Address">
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 col-sm-12">
+                            <div class="form-group">
+                                <input asp-for="Input.Password" class="form-control" type="password" placeholder="Password">
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 col-sm-12 ">
+                            <div class="form-group">
+                                <input asp-for="Input.ConfirmPassword" class="form-control" type="password" placeholder="Confirm Password">
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 col-sm-12 col-xs-12 form-condition">
+                            <div class="agree-label">
+                                <input type="checkbox" id="chb1">
+                                <label for="chb1">
+                                    I agree with Surety
+                                    <a a asp-controller="Home" asp-action="Privacy" target="_blank">Privacy Policy</a>
+                                </label>
+                            </div>
+
+                            <div class="agree-label">
+                                <input type="checkbox" id="chb2">
+                                <label for="chb2">
+                                    I agree with Surety
+                                    <a asp-controller="Home" asp-action="Privacy" target="_blank">Terms & Conditions</a>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <button class="default-btn btn-two" type="submit">
+                                Register Account
+                            </button>
+                        </div>
+
+                        <div class="col-12">
+                            <p class="account-desc">
+                                Already have an account?
+                                <a href="log-in.html"> Log In</a>
+                            </p>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="text-center col-lg-4 mb-4">
+                <h4>Profile Image</h4>
+                <img width="50%" src="/img/DefaultUserImage.png" />
+
+                <div class="col-md-12 col-sm-12 mt-4">
+                    <div class="form-group ">
+                        <div class="custom-file">
+                            <input asp-for="Input.ImageFile" type="file" class="form-control custom-file-input" accept=".jpg, .png,. .tif, .bmp ">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        @*<div class="contact-form-action">
+            <form asp-route-returnUrl="@Model.ReturnUrl" method="post" enctype="multipart/form-data">
+            <div class="row">
+            <div class="col-lg-4 col-md-4 col-sm-12">
+            <button class="default-btn" type="submit">
+            Google
+            </button>
+            </div>
+
+            <div class="col-lg-4 col-md-4 col-sm-12">
+            <button class="default-btn" type="submit">
+            Facebook
+            </button>
+            </div>
+
+            <div class="col-lg-4 col-md-4 col-sm-12">
+            <button class="default-btn" type="submit">
+            Twitter
+            </button>
+            </div>
+
+            <div class="col-md-12 col-sm-12">
+            <div class="form-group">
+            <input asp-for="Input.FirstName" class="form-control" type="text" placeholder="First Name">
+            </div>
+            </div>
+
+            <div class="col-md-12 col-sm-12 ">
+            <div class="form-group">
+            <input asp-for="Input.LastName" class="form-control" type="text" placeholder="Last Name">
+            </div>
+            </div>
+
+            <div class="col-md-12 col-sm-12">
+            <div class="form-group">
+            <input asp-for="Input.UserName" class="form-control" type="text" placeholder="Enter your Username">
+            </div>
+            </div>
+
+            <div class="col-md-12 col-sm-12">
+            <div class="form-group">
+            <input asp-for="Input.Email" class="form-control" type="email" placeholder="Email Address">
+            </div>
+            </div>
+
+            <div class="col-md-12 col-sm-12">
+            <div class="form-group">
+            <input asp-for="Input.Password" class="form-control" type="text" placeholder="Password">
+            </div>
+            </div>
+
+            <div class="col-md-12 col-sm-12 ">
+            <div class="form-group">
+            <input asp-for="Input.ConfirmPassword" class="form-control" type="text" placeholder="Confirm Password">
+            </div>
+            </div>
+
+            <div class="col-md-12 col-sm-12">
+            <div class="form-group ">
+            <div class="custom-file">
+            <label>Profile Image</label>
+            <input asp-for="Input.ImageFile" type="file" class="form-control custom-file-input">
+            <label asp-for="Input.ImageFile" class="control-label custom-file-label">Choose</label>
+            </div>
+            </div>
+            </div>
+
+            <div class="col-md-12 col-sm-12 col-xs-12 form-condition">
+            <div class="agree-label">
+            <input type="checkbox" id="chb1">
+            <label for="chb1">
+            I agree with Surety
+            <a a asp-controller="Home" asp-action="Privacy" target="_blank">Privacy Policy</a>
+            </label>
+            </div>
+
+            <div class="agree-label">
+            <input type="checkbox" id="chb2">
+            <label for="chb2">
+            I agree with Surety
+            <a asp-controller="Home" asp-action="Privacy" target="_blank">Terms & Conditions</a>
+            </label>
+            </div>
+            </div>
+
+            <div class="col-12">
+            <button class="default-btn btn-two" type="submit">
+            Register Account
+            </button>
+            </div>
+
+            <div class="col-12">
+            <p class="account-desc">
+            Already have an account?
+            <a href="log-in.html"> Log In</a>
+            </p>
+            </div>
+            </div>
+            </form>
+            </div>*@
+    </div>
+</div>
+<!-- End Sign Up Area -->
+@section Scripts {
+<partial name="_ValidationScriptsPartial" />
+}
