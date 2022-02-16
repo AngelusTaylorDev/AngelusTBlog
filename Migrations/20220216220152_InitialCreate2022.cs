@@ -2,9 +2,9 @@
 using Microsoft.EntityFrameworkCore.Migrations;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
-namespace AngelusTBlog.Data.Migrations
+namespace AngelusTBlog.Migrations
 {
-    public partial class InitMigration01 : Migration
+    public partial class InitialCreate2022 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -191,7 +191,7 @@ namespace AngelusTBlog.Data.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    BlogId = table.Column<string>(type: "text", nullable: true),
+                    BlogId = table.Column<int>(type: "integer", nullable: false),
                     AuthorID = table.Column<string>(type: "text", nullable: true),
                     Title = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
                     Summary = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: false),
@@ -201,8 +201,7 @@ namespace AngelusTBlog.Data.Migrations
                     ReadyStatus = table.Column<int>(type: "integer", nullable: false),
                     Slug = table.Column<string>(type: "text", nullable: true),
                     ImageData = table.Column<byte[]>(type: "bytea", nullable: true),
-                    ImageType = table.Column<string>(type: "text", nullable: true),
-                    BlogId1 = table.Column<int>(type: "integer", nullable: true)
+                    ImageType = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -214,11 +213,11 @@ namespace AngelusTBlog.Data.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Posts_Blogs_BlogId1",
-                        column: x => x.BlogId1,
+                        name: "FK_Posts_Blogs_BlogId",
+                        column: x => x.BlogId,
                         principalTable: "Blogs",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -351,9 +350,9 @@ namespace AngelusTBlog.Data.Migrations
                 column: "AuthorID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Posts_BlogId1",
+                name: "IX_Posts_BlogId",
                 table: "Posts",
-                column: "BlogId1");
+                column: "BlogId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Tags_AuthorID",

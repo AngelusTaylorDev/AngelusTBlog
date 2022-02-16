@@ -15,8 +15,7 @@ namespace AngelusTBlog.Models
         public int Id { get; set; }
 
         // Blog ID - Forign key
-        [Display(Name = "Blog Name")]
-        public string BlogId { get; set; }
+        public int BlogId { get; set; }
 
         // Post Author ID - Forign key
         public string AuthorID { get; set; }

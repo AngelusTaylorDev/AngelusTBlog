@@ -3,15 +3,17 @@ using System;
 using AngelusTBlog.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
-namespace AngelusTBlog.Data.Migrations
+namespace AngelusTBlog.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220216220152_InitialCreate2022")]
+    partial class InitialCreate2022
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -209,10 +211,7 @@ namespace AngelusTBlog.Data.Migrations
                     b.Property<string>("AuthorID")
                         .HasColumnType("text");
 
-                    b.Property<string>("BlogId")
-                        .HasColumnType("text");
-
-                    b.Property<int?>("BlogId1")
+                    b.Property<int>("BlogId")
                         .HasColumnType("integer");
 
                     b.Property<string>("Content")
@@ -251,7 +250,7 @@ namespace AngelusTBlog.Data.Migrations
 
                     b.HasIndex("AuthorID");
 
-                    b.HasIndex("BlogId1");
+                    b.HasIndex("BlogId");
 
                     b.ToTable("Posts");
                 });
@@ -453,7 +452,9 @@ namespace AngelusTBlog.Data.Migrations
 
                     b.HasOne("AngelusTBlog.Models.Blog", "Blog")
                         .WithMany("Posts")
-                        .HasForeignKey("BlogId1");
+                        .HasForeignKey("BlogId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Author");
 
