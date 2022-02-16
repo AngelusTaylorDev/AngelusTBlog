@@ -83,7 +83,7 @@ namespace AngelusTBlog.Controllers
             var pageSize = 6;
 
             // Ceate a page list with a order set. - where post are production ready
-            var posts = await _context.Posts.Where(p => p.Blog.Id == id && p.ReadyStatus == ReadyStatus.ProductionReady)
+            var posts = await _context.Posts.Where(p => p.BlogId == id && p.ReadyStatus == ReadyStatus.ProductionReady)
                 .Include(p => p.Author)
                 .OrderByDescending(p => p.Created)
                 .ToPagedListAsync(pageNumber, pageSize);
