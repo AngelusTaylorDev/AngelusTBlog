@@ -51,6 +51,9 @@ namespace AngelusTBlog
             // Regester my custom Data service class
             services.AddScoped<DataService>();
 
+            // Regester my custom Blog Search service
+            services.AddScoped<BlogSearchService>();
+
             //Regester a pre - configured instance of the mail Settings class - from the Jason file
             services.Configure<MailSettings>(Configuration.GetSection("MailSettings"));
             // Regester my I Blog Email Sender interface from class Email Service

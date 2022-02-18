@@ -126,16 +126,23 @@ ul {
   padding: 0;
   margin: 0;
 }
+.marginLeftAccountNav {
+    margin-left: 450px;
+}
+
+.marginTopAccountNav {
+    margin-top: -11px;
+}
 
 .form-control {
-  height: 50px;
-  color: #212121;
-  border: 1px solid var(--white-color);
-  background-color: #f2f9fc;
-  border-radius: 0;
-  font-size: 14px;
-  padding: 10px 20px;
-  width: 100%;
+    height: 50px;
+    color: #212121;
+    border: 1px solid var(--white-color);
+    background-color: #f2f9fc;
+    border-radius: 0;
+    font-size: 14px;
+    padding: 10px 20px;
+    width: 100%;
 }
 
 .form-control::-webkit-input-placeholder {
@@ -341,6 +348,341 @@ Section Title Area Style*/
     padding-bottom: 50px;
 }
 
+/*====================================================
+					HOME STYLE THREE
+======================================================*/
+/*
+Header Area Style
+======================================================*/
+.top-header {
+  background-color: var(--secondary-color);;
+  text-align: center;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.top-header span {
+  display: inline-block;
+  background-color: #ffffff;
+  border-radius: 4px;
+  padding: 5px;
+  font-weight: 500;
+  line-height: 1;
+  margin-right: 10px;
+}
+
+.top-header p {
+  display: inline-block;
+  line-height: 1;
+  margin-bottom: 0;
+  color: #ffffff;
+  font-size: 14px;
+}
+
+.top-header .read-more {
+  display: inline-block;
+  color: #ffffff;
+  margin-left: 10px;
+  font-weight: 500;
+}
+
+.top-header .read-more:hover {
+  color: #212121;
+}
+
+.logo-title {
+  text-align: center;
+  font-size: 30px;
+  font-weight: 600;
+  color: #212121;
+  display: block;
+}
+
+.middle-header {
+  background-color: white;
+  padding: 7px;
+}
+
+.middle-header .middle-menu-one ul li {
+  display: inline-block;
+  padding: 0 8px;
+  font-size: 1rem;
+}
+
+.middle-header .middle-menu-one ul li:first-child {
+  padding: 0;
+}
+
+.middle-header .middle-menu-one ul li a {
+  color: var(--Black-color);
+}
+
+.middle-header .middle-menu-one ul li a:hover {
+  color: var(--secondary-color);
+}
+
+.middle-header .middle-menu-two {
+  text-align: right;
+}
+
+.middle-header .middle-menu-two ul li {
+  display: inline-block;
+  padding: 0 8px;
+  font-size: 1rem;
+}
+
+.middle-header .middle-menu-two ul li:last-child {
+  padding: 0;
+}
+
+.middle-header .middle-menu-two ul li a {
+  color: var(--Black-color);
+}
+
+.middle-header .middle-menu-two ul li a:hover {
+  color: var(--secondary-color);
+}
+
+.bottom-header {
+  background-color: #ffffff;
+}
+
+.bottom-header .container {
+  border-bottom: 1px solid #eeeeee;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.bottom-header ul {
+  line-height: 1;
+  position: relative;
+  top: 17px;
+}
+
+.bottom-header ul li {
+  display: inline-block;
+  padding-right: 5px;
+}
+
+.bottom-header ul li a {
+  color: #343434;
+  font-size: 20px;
+  line-height: 1;
+}
+
+.bottom-header ul li a:hover {
+  color: var(--secondary-color);;
+}
+
+.bottom-header .others-option {
+  position: relative;
+  top: 17px;
+  line-height: 1;
+  text-align: right;
+}
+
+.bottom-header .others-option .cart {
+  display: inline-block;
+  margin-left: 20px;
+  position: relative;
+  line-height: 1;
+}
+
+.bottom-header .others-option .cart a {
+  color: #343434;
+}
+
+.bottom-header .others-option .cart a i {
+  font-size: 20px;
+}
+
+.bottom-header .others-option .cart a:hover {
+  color: var(--secondary-color);;
+}
+
+.bottom-header .others-option .cart .cart-count {
+  position: absolute;
+  top: -8px;
+  left: 11px;
+  color: var(--secondary-color);;
+  background-color: #d4d4d4;
+  -webkit-box-shadow: 0 0 20px 3px rgba(0, 0, 0, 0.05);
+          box-shadow: 0 0 20px 3px rgba(0, 0, 0, 0.05);
+  width: 15px;
+  height: 15px;
+  line-height: 16px;
+  text-align: center;
+  border-radius: 50%;
+  font-size: 12px;
+}
+
+.bottom-header .others-option .option-item {
+  color: #343434;
+  display: inline-block;
+  position: relative;
+  line-height: 1;
+  top: 0px;
+  margin-left: 20px;
+}
+
+.bottom-header .others-option .option-item .search-overlay {
+  display: none;
+}
+
+.bottom-header .others-option .option-item .search-overlay.search-popup {
+  position: absolute;
+  top: 100%;
+  width: 300px;
+  right: 0;
+  background: #ffffff;
+  z-index: 2;
+  padding: 20px;
+  -webkit-box-shadow: 0 0 20px 3px rgba(0, 0, 0, 0.05);
+          box-shadow: 0 0 20px 3px rgba(0, 0, 0, 0.05);
+  margin-top: 27px;
+  border-top: 2px solid var(--secondary-color);;
+}
+
+.bottom-header .others-option .option-item .search-overlay.search-popup .search-form {
+  position: relative;
+}
+
+.bottom-header .others-option .option-item .search-overlay.search-popup .search-form .search-input {
+  display: block;
+  width: 100%;
+  height: 50px;
+  line-height: initial;
+  border: 1px solid #eeeeee;
+  color: #212121;
+  outline: 0;
+  -webkit-transition: all 0.5s;
+  transition: all 0.5s;
+  font-size: 15px;
+  padding-top: 4px;
+  padding-left: 15px;
+}
+
+.bottom-header .others-option .option-item .search-overlay.search-popup .search-form .search-input:focus {
+  border-color: var(--secondary-color);;
+}
+
+.bottom-header .others-option .option-item .search-overlay.search-popup .search-form .search-button {
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 50px;
+  background: var(--secondary-color);;
+  border: none;
+  width: 50px;
+  outline: 0;
+  color: #ffffff;
+  -webkit-transition: all 0.5s;
+  transition: all 0.5s;
+  padding: 0;
+}
+
+.bottom-header .others-option .option-item .search-overlay.search-popup .search-form .search-button:hover {
+  background-color: #212121;
+}
+
+.bottom-header .others-option .option-item .search-btn {
+  cursor: pointer;
+  -webkit-transition: all 0.5s;
+  transition: all 0.5s;
+  color: #343434;
+  width: 25px;
+  height: 25px;
+  font-size: 20px;
+  line-height: 27px;
+  border-radius: 50%;
+  text-align: center;
+}
+
+.bottom-header .others-option .option-item .search-btn:hover {
+  color: var(--secondary-color);;
+}
+
+.bottom-header .others-option .option-item .close-btn {
+  cursor: pointer;
+  display: none;
+  -webkit-transition: all 0.5s;
+  transition: all 0.5s;
+  width: 25px;
+  height: 25px;
+  font-size: 20px;
+  line-height: 27px;
+  border-radius: 50%;
+  text-align: center;
+  color: var(--secondary-color);;
+}
+
+.bottom-header .others-option .option-item .close-btn:hover {
+  color: var(--secondary-color);;
+}
+
+.bottom-header .others-option .option-item .close-btn.active {
+  display: block;
+}
+
+.navbar-area-four .main-nav {
+  background-color: #ffffff;
+  -webkit-box-shadow: 0 0 20px 3px rgba(0, 0, 0, 0.05);
+          box-shadow: 0 0 20px 3px rgba(0, 0, 0, 0.05);
+  -webkit-box-shadow: 0px 20px 20px 3px rgba(0, 0, 0, 0.05);
+          box-shadow: 0px 20px 20px 3px rgba(0, 0, 0, 0.05);
+}
+
+.navbar-area-four .main-nav nav .navbar-nav .nav-item a {
+  color: #212121;
+}
+
+.navbar-area-four .others-option .follow {
+  color: #212121;
+}
+
+.navbar-area-four .others-option .cart {
+  color: #212121;
+}
+
+.navbar-area-four .others-option .cart a {
+  color: #212121;
+}
+
+.navbar-area-four .others-option .cart .cart-count {
+  background-color: var(--secondary-color);;
+  color: #ffffff;
+}
+
+.navbar-area-four .others-option .option-item .search-btn {
+  color: #212121;
+}
+
+/*
+Subscribe Area Style
+======================================================*/
+.subscribe-wrap .default-btn {
+  text-align: center;
+  margin: auto;
+  display: table;
+  margin-top: 20px;
+}
+
+.subscribe-wrap #validator-newsletter {
+  text-align: center;
+  margin-top: 5px;
+  color: var(--secondary-color);;
+}
+
+.modal-content .close {
+  width: 30px;
+  height: 30px;
+  background-color: var(--secondary-color);;
+  text-align: center;
+  margin-left: auto;
+  color: #ffffff;
+}
+
+
 /*===== DEFAULT STYLE END ======*/
 /*====================================================
 HOME PAGE ONE STYLE
@@ -396,7 +738,7 @@ Nav Area Style
   top: 5px;
 }
 
-.navbar-area .main-nav nav .navbar-nav .nav-item a:hover {
+.navbar-area .main-nav nav .navbar-nav .nav- a:hover {
   color: var(--secondary-color);
 }
 
@@ -1760,7 +2102,7 @@ Banner Area Style
   padding-top: 150px;
   padding-bottom: 150px;
   position: relative;
-  margin-bottom: 50px;
+  margin-bottom: 25px;
   z-index: 1;
 }
 

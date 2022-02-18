@@ -34,6 +34,12 @@ namespace AngelusTBlog.Controllers
             return View(await applicationDbContext.ToListAsync());
         }
 
+        public async Task<IActionResult> AllBlogs()
+        {
+            var applicationDbContext = _context.Blogs.Include(b => b.Author);
+            return View(await applicationDbContext.ToListAsync());
+        }
+
         // GET: Blogs/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -55,7 +61,7 @@ namespace AngelusTBlog.Controllers
 
         // GET: Blogs/Create
         // Make sure the user is Authorize.
-        [Authorize]
+        [Authorize(Roles = "Administrator,Moderators")]
         public IActionResult Create()
         {
             return View();
@@ -92,6 +98,7 @@ namespace AngelusTBlog.Controllers
         }
 
         // GET: Blogs/Edit/5
+        [Authorize]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -165,6 +172,7 @@ namespace AngelusTBlog.Controllers
         }
 
         // GET: Blogs/Delete/5
+        [Authorize]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)

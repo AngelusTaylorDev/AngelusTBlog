@@ -1,0 +1,56 @@
+﻿@using AngelusTBlog.Models
+@using AngelusTBlog.Services
+@using AngelusTBlog.Enums
+@inject IImageService imageService
+@model IEnumerable<Blog>
+
+
+@{
+    ViewData["Title"] = "All Blogs";
+}
+
+
+<!-- Start Search Area -->
+<section class="latest-project-area pb-70">
+    <div class="container">
+        <div class="section-title text-center">
+            <h2 class="p-3 mt-4">@ViewData["Title"]</h2>
+        </div>
+        <div class="row">
+            @foreach (var blogs in Model)
+            {
+                <div class="card col-lg-3 col-md-6 m-2" style="width: 26rem;">
+                    <div class="single-featured p-2">
+                        <a class="read-more" asp-controller="Posts" asp-action="BlogPostIndex" asp-route-id="@blogs.Id">
+                            <img class="card-img-top blogImage" src="@imageService.DecodeImage(blogs.ImageData, blogs.ImageType)" alt="Image">
+                        </a>
+                        <div class="card-body">
+                            <div class="featured-content">
+                                <ul>
+                                    <li>
+                                        <a class="read-more" asp-controller="Posts" asp-action="BlogPostIndex" asp-route-id="@blogs.Id">
+                                            <i class="bx bx-user"></i>
+                                            Created By: @blogs.Author.FirstName
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <i class="bx bx-calendar"></i>
+                                        @blogs.Created.ToString("MMM dd, yyyy")
+                                    </li>
+                                </ul>
+
+                                <a class="card-title m-auto" asp-controller="Posts" asp-action="BlogPostIndex" asp-route-id="@blogs.Id">
+                                    <h5>@blogs.Name</h5>
+                                </a>
+
+                                <p class="card-text m-auto">@Html.Raw(@blogs.Description)</p>
+                                <a class="read-more" asp-controller="Posts" asp-action="BlogPostIndex" asp-route-id="@blogs.Id">Read More</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+<!-- End Search Area -->

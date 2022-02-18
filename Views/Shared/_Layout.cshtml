@@ -37,104 +37,84 @@
     <link rel="icon" type="image/png" href="~/img/favicon.png">
 </head>
 <body>
-    <header>
-        <!-- Start Navbar Area -->
-        <div class="navbar-area navbar-area-two">
-            <!-- Menu For Mobile Device -->
-            <div class="mobile-nav">
-                <a asp-controller="Home" asp-action="Index" class="logo">
-                    <img src="~/img/logo.png" alt="Logo">
-                </a>
+    <!-- Start Navbar Area -->
+    <div class="navbar-area navbar-area-two">
+        <!-- Menu For Mobile Device -->
+        <div class="mobile-nav">
+            <a asp-controller="Home" asp-action="Index" class="logo">
+                <img src="~/img/logo.png" alt="Logo">
+            </a>
+            <div class="middle-menu-two">
+                <partial name="_LoginPartial">
             </div>
+        </div>
 
-            <!-- Menu For Desktop Device -->
-            <div class="main-nav">
-                <nav class="navbar navbar-expand-md">
-                    <div class="container-fluid">
-                        <a class="navbar-brand logo" asp-controller="Home" asp-action="Index">
-                            <img class="mainLogo" src="~/img/logo.png" alt="Logo">
-                        </a>
+        <!-- Start Header Area -->
+        <div class="middle-header">
+            <div class="container-fluid">
+                <div class="collapse navbar-collapse mean-menu">
+                    <div class="row">
 
-                        <div class="collapse navbar-collapse mean-menu">
-                            <ul class="navbar-nav m-auto">
-                                <li class="nav-item">
-                                    <a class="nav-link" asp-controller="Home" asp-action="Index">Home</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" target="_blank" href="https://angelustaylor.com/">Author</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" asp-controller="Home" asp-action="Contact">Contact</a>
-                                </li>
-                            </ul>
+                        <div class="col-lg-1 col-md-1 m-auto ">
+                            <a class="navbar-brand logo" asp-controller="Home" asp-action="Index">
+                                <img class="mainLogo" src="~/img/logo.png" alt="Logo">
+                            </a>
+                        </div>
 
-                            <ul class="navbar-nav ms-auto">
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">Account</a>
-                                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                        <li>
-                                            <partial name="_LoginPartial">
-                                        </li>
-                                    </ul>
-                                </li>
-                            </ul>
+                        <div class="col-lg-4 col-md-4 m-auto">
+                            <div class="middle-menu-one">
+                                <ul>
+                                    <li>
+                                        <a asp-controller="Home" asp-action="Index">Home</a>
+                                    </li>
+                                    <li>
+                                        <a asp-controller="Blogs" asp-action="AllBlogs">Blogs</a> 
+                                    </li>
+                                    <li>
+                                        <a asp-controller="Posts" asp-action="SearchIndex">Posts</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a target="_blank" href="https://angelustaylor.com/">Author</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a asp-controller="Home" asp-action="Contact">Contact</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
 
-                            <!-- Start Other Option -->
+                        <div class="col-lg-3 col-md-3 m-auto">
                             <div class="others-option">
-                                <div class="follow">
-                                    <span>Follow</span>
-                                    <i class="bx bx-chevron-down"></i>
-                                    <ul>
-                                        <li>
-                                            <a href="#" target="_blank">
-                                                <i class="bx bxl-facebook"></i>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#" target="_blank">
-                                                <i class="bx bxl-twitter"></i>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#" target="_blank">
-                                                <i class="bx bxl-instagram"></i>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#" target="_blank">
-                                                <i class="bx bxl-youtube"></i>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#" target="_blank">
-                                                <i class="bx bxl-linkedin"></i>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-
-                                <div class="option-item">
-                                    <i class="search-btn bx bx-search"></i>
-                                    <i class="close-btn bx bx-x"></i>
-
-                                    <div class="search-overlay search-popup">
-                                        <div class='search-box'>
-                                            <form class="search-form" asp-action="SearchIndex" asp-controller="Posts">
-                                                <input type="text" name="SearchTerm" class="form-control search-input" placeholder="Search">
-                                                <button class="search-button" type="submit"><i class="bx bx-search"></i></button>
-                                            </form>
-                                        </div>
+                                <div class="search-overlay search-popup">
+                                    <div class='search-box'>
+                                        <form class="search-form" asp-action="SearchIndex" asp-controller="Posts">
+                                            <div class="row">
+                                                <div class="col-lg-9">
+                                                    <input type="text" name="SearchTerm" class="form-control search-input" placeholder="Search">
+                                                </div>
+                                                <div class="col-lg-3">
+                                                    <button class="search-button default-btn btn-two col-lg-3" type="submit"><i class="bx bx-search"></i></button>
+                                                </div>
+                                                
+                                            </div>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
                         </div>
+
+                        <div class="col-lg-4 col-md-4 m-auto">
+                            <div class="middle-menu-two partial">
+                                <partial name="_LoginPartial">
+                            </div>
+                        </div>
                     </div>
-                </nav>
+                </div>
+
             </div>
         </div>
-        <!-- End Navbar Area -->
-    </header>
-
+    </div>
+    <!-- End Header Area -->
     <!-- Main Body Start -->
     <section class="blog-details-area">
         <div class="container-fluid">
@@ -155,15 +135,12 @@
                             <img class="mainLogo" src="~/img/logo.png" alt="Image">
                         </a>
 
-                        <p>Lorem ipsum dolor, sit amet earum consectetur adipisicing elit sit. Cupiditate rerum quidem fugiat sapiente! to quae perspiciatis.</p>
+                        <p>
+                            I am currently building my blog from scratch. I am using C#, .NET 5, asp.net VNC, javascript also Bootstrap 5 This will be done by end of this week. My blog covers a lot of the unknowns of Data structures and Algorithms. It will help new devs like myself to be more confident when facing coding interviews.
+                        </p>
 
                         <div class="social-area">
                             <ul>
-                                <li>
-                                    <a href="#" target="_blank">
-                                        <i class="bx bxl-facebook"></i>
-                                    </a>
-                                </li>
                                 <li>
                                     <a href="#" target="_blank">
                                         <i class="bx bxl-twitter"></i>
@@ -172,16 +149,6 @@
                                 <li>
                                     <a href="#" target="_blank">
                                         <i class="bx bxl-linkedin"></i>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" target="_blank">
-                                        <i class="bx bxl-youtube"></i>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" target="_blank">
-                                        <i class="bx bxl-instagram"></i>
                                     </a>
                                 </li>
                             </ul>
@@ -310,12 +277,14 @@
         <!-- End Footer Bottom Area -->
     </footer>
     <!-- End Footer Area -->
+
     <!-- Start Go Top Area -->
     <div class="go-top">
         <i class='bx bx-chevrons-up'></i>
         <i class='bx bx-chevrons-up'></i>
     </div>
     <!-- End Go Top Area -->
+
     <!-- Start tinymce Script -->
     <script>
         tinymce.init({

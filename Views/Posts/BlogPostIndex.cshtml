@@ -15,7 +15,7 @@
 <section class="latest-project-area pb-70">
     <div class="container">
         <div class="section-title text-center">
-            <h2 class="p-3 mt-4">@ViewData["Title"] of</h2>
+            <h2 class="p-3 mt-4">@ViewData["Title"]</h2>
         </div>
         <div class="row">
             @foreach (var post in Model)
@@ -44,7 +44,7 @@
                                     <h5>@post.Title</h5>
                                 </a>
 
-                                <p class="card-text">@post.Summary</p>
+                                <p class="card-text">@Html.Raw(@post.Summary)</p>
                                 <a class="read-more" asp-action="Details" asp-route-slug="@post.Slug">Read More</a>
                             </div>
                         </div>

@@ -8,9 +8,14 @@
 
 <h1>@ViewData["Title"]</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+
+@if (User.IsInRole("Administrator"))
+{
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
+}
+
 <table class="table">
     <thead>
         <tr>
@@ -64,9 +69,14 @@
                     <img class="img-fluid" width="200" src="@imageService.DecodeImage(@item.ImageData, @item.ImageType)" />
                 </td>
                 <td>
-                    <a asp-action="Edit" asp-route-slug="@item.Slug">Edit</a> |
-                    <a asp-action="Details" asp-route-slug="@item.Slug">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    @if(User.IsInRole("Administrator"))
+                    {
+                        <a asp-action="Edit" asp-route-slug="@item.Slug">Edit</a> 
+                        <br />
+                        <a asp-action="Details" asp-route-slug="@item.Slug">Details</a>
+                        <br />
+                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    }
                 </td>
             </tr>
         }

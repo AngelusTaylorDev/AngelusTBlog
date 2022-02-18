@@ -16,13 +16,13 @@
                     <div class="article-content">
                         <div class="entry-meta">
                             <ul>
-                                <li>Posted On:  @Model.Created</li>
-                                <li>Posted By:  @Model.Author</li>
+                                <li>Posted On:  @Model.Created.ToString("MMM dd, yyyy")</li>
+                                <li>Posted By:  @Model.Author.FirstName</li>
                             </ul>
                         </div>
                         <h1 class="text-center mt-4">@Model.Title</h1>
 
-                        <div class="article-image rounded mx-auto d-block mt-4">
+                        <div class="article-image rounded m-auto">
                             <img src="@imageService.DecodeImage(@Model.ImageData , @Model.ImageType)" alt="@Model.Image">
                         </div>
 

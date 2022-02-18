@@ -22,16 +22,18 @@ namespace AngelusTBlog.Controllers
         private readonly IImageService _imageService;
         private readonly UserManager<BlogUser> _userManager;
         private readonly ISlugService _slugService;
+        private readonly BlogSearchService _blogSearchService;
 
-        public PostsController(ApplicationDbContext context, 
-            UserManager<BlogUser> userManager, 
-            IImageService imageService, 
-            ISlugService slugService)
+        public PostsController(ApplicationDbContext context,
+            UserManager<BlogUser> userManager,
+            IImageService imageService,
+            ISlugService slugService, BlogSearchService blogSearchService)
         {
             _context = context;
             _userManager = userManager;
             _imageService = imageService;
             _slugService = slugService;
+            _blogSearchService = blogSearchService;
         }
 
         // Search results 
@@ -43,24 +45,9 @@ namespace AngelusTBlog.Controllers
             var pageNumber = page ?? 1;
             var pageSize = 6;
 
-            // get a Queryable list of post
-            var posts =  _context.Posts.Where(p => p.ReadyStatus == ReadyStatus.ProductionReady)
-                .Include(p => p.Author)
-                .AsQueryable();
+            var posts = _blogSearchService.Search(searchTerm);
 
-            // Searching all the post and comments 
-            if (searchTerm != null)
-            {
-                posts = posts.Where(p => p.Title.Contains(searchTerm) || 
-                p.Summary.Contains(searchTerm) || 
-                p.Content.Contains(searchTerm) || 
-                p.Comments.Any(c => c.CommentBody.Contains(searchTerm) ||
-                                                 c.ModeratedCommentBody.Contains(searchTerm) ||
-                                                 c.Author.FirstName.Contains(searchTerm) ||
-                                                 c.Author.LastName.Contains(searchTerm) ||
-                                                 c.Author.Email.Contains(searchTerm)));
-            }
-            posts = posts.OrderByDescending(p => p.Created);
+            
             return View(await posts.ToPagedListAsync(pageNumber, pageSize));
         }
 
@@ -322,6 +309,7 @@ namespace AngelusTBlog.Controllers
         }
 
         // GET: Posts/Delete/5
+        [Authorize]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)

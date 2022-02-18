@@ -18,14 +18,6 @@
         }
     });
 
-    // Sidebar Modal JS
-    $(".burger-menu").on('click', function () {
-        $('.sidebar-modal').toggleClass('active');
-    });
-    $(".sidebar-modal-close-btn").on('click', function () {
-        $('.sidebar-modal').removeClass('active');
-    });
-
     // Main Blog Slider Item Wrap JS
     $('.main-blog-slider-item-wrap').owlCarousel({
         loop: true,

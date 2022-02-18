@@ -503,3 +503,4 @@ C:\Users\Angel\PROJECTS\ANGELUSTDEV\.NET-DEV\ASP.NET-MVC\AngelusTBlog\obj\Debug\
 C:\Users\Angel\PROJECTS\ANGELUSTDEV\.NET-DEV\ASP.NET-MVC\AngelusTBlog\obj\Debug\net5.0\Razor\Views\Posts\BlogPostIndex.cshtml.g.cs
 C:\Users\Angel\PROJECTS\ANGELUSTDEV\.NET-DEV\ASP.NET-MVC\AngelusTBlog\obj\Debug\net5.0\refint\AngelusTBlog.dll
 C:\Users\Angel\PROJECTS\ANGELUSTDEV\.NET-DEV\ASP.NET-MVC\AngelusTBlog\obj\Debug\net5.0\Razor\Views\Posts\SearchIndex.cshtml.g.cs
+C:\Users\Angel\PROJECTS\ANGELUSTDEV\.NET-DEV\ASP.NET-MVC\AngelusTBlog\obj\Debug\net5.0\Razor\Views\Blogs\AllBlogs.cshtml.g.cs

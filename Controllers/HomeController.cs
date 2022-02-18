@@ -35,18 +35,12 @@ namespace AngelusTBlog.Controllers
             // Set the page size
             var pageSize = 6;
 
-            // Setup the page list feature
-            //var blogs = _context.Blogs.Where(
-            //    b => b.Posts.Any(p => p.ReadyStatus == Enums.ReadyStatus.ProductionReady))
-            //    .OrderByDescending(b => b.Created)
-            //    .ToPagedListAsync(pageNumber, pageSize);
-
-            var blogs = _context.Blogs
-                .Include(b => b.Author)
-                .OrderByDescending(b => b.Created)
+            var posts = _context.Posts
+                .Include(p => p.Author)
+                .OrderByDescending(p => p.Created)
                 .ToPagedListAsync(pageNumber, pageSize);
 
-            return View(await blogs);
+            return View(await posts);
         }
 
         public IActionResult Contact()
