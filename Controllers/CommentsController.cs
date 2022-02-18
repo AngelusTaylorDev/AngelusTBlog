@@ -7,16 +7,20 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using AngelusTBlog.Data;
 using AngelusTBlog.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 
 namespace AngelusTBlog.Controllers
 {
     public class CommentsController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<BlogUser> _UserManager;
 
-        public CommentsController(ApplicationDbContext context)
+        public CommentsController(ApplicationDbContext context, UserManager<BlogUser> userManager)
         {
             _context = context;
+            _UserManager = userManager;
         }
 
         // GET: Comments all Comments: GET: Comments/Details/5
@@ -40,28 +44,17 @@ namespace AngelusTBlog.Controllers
             return View("Index", await moderatedIndex);
         }
 
-        // GET: Getting all of the soft Deleted Comments
-        //public async Task<IActionResult> DeletedIndex()
-        //{
-        //    Soft Delete Boolen 
-        //}
-        
-
-        // GET: Comments/Create
-        //public IActionResult Create()
-        //{
-        //    ViewData["AuthorID"] = new SelectList(_context.Users, "Id", "Id");
-        //    ViewData["ModeratorID"] = new SelectList(_context.Users, "Id", "Id");
-        //    return View();
-        //}
-
         // POST: Comments/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,PostId,AuthorID,ModeratorID,CommentBody,Creaed,Updated,Moderated,Deleted,ModeratedCommentBody,ModerationType")] Comment comment)
+        [Authorize]
+        public async Task<IActionResult> Create([Bind("PostId,CommentBody")] Comment comment)
         {
             if (ModelState.IsValid)
             {
+                // Getting the user ID
+                comment.AuthorID = _UserManager.GetUserId(User);
+
                 // Recoarding the created date.
                 comment.Created = DateTime.Now;
 
@@ -94,11 +87,9 @@ namespace AngelusTBlog.Controllers
         }
 
         // POST: Comments/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,PostId,AuthorID,ModeratorID,CommentBody,Creaed,Updated,Moderated,Deleted,ModeratedCommentBody,ModerationType")] Comment comment)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,CommentBody")] Comment comment)
         {
             if (id != comment.Id)
             {
@@ -107,10 +98,14 @@ namespace AngelusTBlog.Controllers
 
             if (ModelState.IsValid)
             {
+                var newComment = await _context.Comments.Include(c => c.Post).FirstOrDefaultAsync(c => c.Id == comment.Id);
+                
                 try
                 {
-                    _context.Update(comment);
+                    newComment.CommentBody = comment.CommentBody;
+                    newComment.Updated = comment.Updated;
                     await _context.SaveChangesAsync();
+
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -123,10 +118,8 @@ namespace AngelusTBlog.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Details", "Posts", new { slug = newComment.Post.Slug }, "commentsSection");
             }
-            ViewData["AuthorID"] = new SelectList(_context.Users, "Id", "Id", comment.AuthorID);
-            ViewData["ModeratorID"] = new SelectList(_context.Users, "Id", "Id", comment.ModeratorID);
             return View(comment);
         }
 

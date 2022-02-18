@@ -3425,10 +3425,10 @@ Blog Details Area Style
 }
 
 .blog-details-area .comments-area .comment-author .avatar {
-  height: 50px;
-  left: -65px;
+  height: 65px;
+  left: -75px;
   position: absolute;
-  width: 50px;
+  width: 65px;
   border-radius: 50%;
 }
 

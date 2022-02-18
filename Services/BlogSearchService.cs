@@ -23,6 +23,7 @@ namespace AngelusTBlog.Services
             // get a Queryable list of post
             var posts = _context.Posts.Where(p => p.ReadyStatus == ReadyStatus.ProductionReady)
                 .Include(p => p.Author)
+                .Include(p => p.Tags)
                 .AsQueryable();
 
             // Searching all the post and comments 
