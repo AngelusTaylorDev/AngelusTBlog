@@ -355,7 +355,7 @@ Section Title Area Style*/
 Header Area Style
 ======================================================*/
 .top-header {
-  background-color: var(--secondary-color);;
+  background-color: var(--secondary-color);
   text-align: center;
   padding-top: 10px;
   padding-bottom: 10px;
@@ -471,7 +471,7 @@ Header Area Style
 }
 
 .bottom-header ul li a:hover {
-  color: var(--secondary-color);;
+  color: var(--secondary-color);
 }
 
 .bottom-header .others-option {
@@ -497,14 +497,14 @@ Header Area Style
 }
 
 .bottom-header .others-option .cart a:hover {
-  color: var(--secondary-color);;
+  color: var(--secondary-color);
 }
 
 .bottom-header .others-option .cart .cart-count {
   position: absolute;
   top: -8px;
   left: 11px;
-  color: var(--secondary-color);;
+  color: var(--secondary-color);
   background-color: #d4d4d4;
   -webkit-box-shadow: 0 0 20px 3px rgba(0, 0, 0, 0.05);
           box-shadow: 0 0 20px 3px rgba(0, 0, 0, 0.05);
@@ -540,7 +540,7 @@ Header Area Style
   -webkit-box-shadow: 0 0 20px 3px rgba(0, 0, 0, 0.05);
           box-shadow: 0 0 20px 3px rgba(0, 0, 0, 0.05);
   margin-top: 27px;
-  border-top: 2px solid var(--secondary-color);;
+  border-top: 2px solid var(--secondary-color);
 }
 
 .bottom-header .others-option .option-item .search-overlay.search-popup .search-form {
@@ -563,7 +563,7 @@ Header Area Style
 }
 
 .bottom-header .others-option .option-item .search-overlay.search-popup .search-form .search-input:focus {
-  border-color: var(--secondary-color);;
+  border-color: var(--secondary-color);
 }
 
 .bottom-header .others-option .option-item .search-overlay.search-popup .search-form .search-button {
@@ -571,7 +571,7 @@ Header Area Style
   right: 0;
   top: 0;
   height: 50px;
-  background: var(--secondary-color);;
+  background: var(--secondary-color);
   border: none;
   width: 50px;
   outline: 0;
@@ -599,7 +599,7 @@ Header Area Style
 }
 
 .bottom-header .others-option .option-item .search-btn:hover {
-  color: var(--secondary-color);;
+  color: var(--secondary-color);
 }
 
 .bottom-header .others-option .option-item .close-btn {
@@ -613,11 +613,11 @@ Header Area Style
   line-height: 27px;
   border-radius: 50%;
   text-align: center;
-  color: var(--secondary-color);;
+  color: var(--secondary-color);
 }
 
 .bottom-header .others-option .option-item .close-btn:hover {
-  color: var(--secondary-color);;
+  color: var(--secondary-color);
 }
 
 .bottom-header .others-option .option-item .close-btn.active {
@@ -649,7 +649,7 @@ Header Area Style
 }
 
 .navbar-area-four .others-option .cart .cart-count {
-  background-color: var(--secondary-color);;
+  background-color: var(--secondary-color);
   color: #ffffff;
 }
 
@@ -670,13 +670,13 @@ Subscribe Area Style
 .subscribe-wrap #validator-newsletter {
   text-align: center;
   margin-top: 5px;
-  color: var(--secondary-color);;
+  color: var(--secondary-color);
 }
 
 .modal-content .close {
   width: 30px;
   height: 30px;
-  background-color: var(--secondary-color);;
+  background-color: var(--secondary-color);
   text-align: center;
   margin-left: auto;
   color: #ffffff;

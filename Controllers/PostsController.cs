@@ -88,11 +88,13 @@ namespace AngelusTBlog.Controllers
 
             var post = await _context.Posts
                 .Include(p => p.Blog)
+                .Include(b => b.Blog.Posts)
                 .Include(p => p.Author)
                 .Include(p => p.Tags)
                 .Include(p => p.Comments)
                 .ThenInclude(c => c.Author)
                 .FirstOrDefaultAsync(m => m.Slug == slug);
+
             if (post == null)
             {
                 return NotFound();

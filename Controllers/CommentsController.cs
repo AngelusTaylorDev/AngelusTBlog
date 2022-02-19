@@ -103,7 +103,7 @@ namespace AngelusTBlog.Controllers
                 try
                 {
                     newComment.CommentBody = comment.CommentBody;
-                    newComment.Updated = comment.Updated;
+                    newComment.Updated = DateTime.Now;
                     await _context.SaveChangesAsync();
 
                 }

@@ -18,7 +18,7 @@
 <section class="blog-details-area ptb-100">
     <div class="container">
         <div class="row">
-            <div class="col-lg-9 col-md-12">
+            <div class="col-lg-10 col-md-12">
                 <div class="blog-details-desc">
                     <div class="article-content">
                         <h1 class="text-center">@Model.Title</h1>
@@ -41,91 +41,11 @@
 
                         <br />
 
-                        <h3 class="related-posts">Related Post</h3>
-                        <div class="row">
-                            <div class="col-lg-6 col-sm-6">
-                                <div class="b-d-s-item">
-                                    <a href="post-style-one.html">
-                                        <img src="~/img/blog-img/1.jpg" alt="Image">
-                                        <span class="s-date">
-                                            08 <br> jun
-                                        </span>
-                                        <h3>Why We Need For Guidelines For Brain Scan Data</h3>
-                                    </a>
-
-                                    <p>Lorem ipsum, dolor sit amet consectetur sit adipisicing Consectetur nisi pariatur quos.</p>
-
-                                    <a href="post-style-one.html">Read More</a>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-sm-6">
-                                <div class="b-d-s-item mb-0">
-                                    <a href="post-style-one.html">
-                                        <img src="~/img/blog-img/2.jpg" alt="Image">
-                                        <span class="s-date">
-                                            09 <br> jun
-                                        </span>
-                                        <h3>How To Build Artificial Intelligence You Can Trust</h3>
-                                    </a>
-
-                                    <p>Lorem ipsum, dolor sit amet consectetur sit adipisicing Consectetur nisi pariatur quos.</p>
-
-                                    <a href="post-style-one.html">Read More</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="article-footer">
-                        <div class="article-tags">
-                            <span><i class='bx bx-share-alt'></i></span>
-
-                            <a href="#">Share</a>
-                        </div>
-
-                        <div class="article-share">
-                            <ul class="social">
-                                <li>
-                                    <a href="#" target="_blank">
-                                        <i class='bx bxl-facebook'></i>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" target="_blank">
-                                        <i class='bx bxl-twitter'></i>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" target="_blank">
-                                        <i class='bx bxl-linkedin'></i>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" target="_blank">
-                                        <i class='bx bxl-pinterest-alt'></i>
-                                    </a>
-                                </li>
-
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="post-navigation">
-                        <div class="navigation-links">
-                            <div class="nav-previous">
-                                <a href="#"><i class='bx bx-left-arrow-alt'></i> Prev Post</a>
-                            </div>
-
-                            <div class="nav-next">
-                                <a href="#">Next Post <i class='bx bx-right-arrow-alt'></i></a>
-                            </div>
-                        </div>
                     </div>
 
                     <!-- Comment Area -->
-                    <div class="comments-area" >
+                    <div class="comments-area">
                         <h3 class="comments-title" id="commentsSection">@Model.Comments.Count: Comments</h3>
-
                         @foreach (var comment in Model.Comments)
                         {
                             <ol class="comment-list">
@@ -200,7 +120,7 @@
                                         </div>
 
                                         <!-- Modal body -->
-                                    <form asp-controller="Comments" asp-action="Edit" class=" modal-body mx-3">
+                                    <form asp-controller="Comments" asp-action="Edit" class="modal-body mx-3">
                                             @Html.Hidden("Id", comment.Id)
 
                                             <div class="md-form mb-5">
@@ -253,22 +173,26 @@
                 </div>
             </div>
 
-            <div class="col-lg-3 col-md-12">
+            <div class="col-lg-2 col-md-12">
                 <aside class="widget-area" id="secondary">
 
-                    <!-- Tags -->
-                    <section class="widget widget_tag_cloud">
-                        <h3 class="widget-title">Tags</h3>
-                        <div class="post-wrap">
-                            <div class="tagcloud">
-                                @foreach (var tag in Model.Tags)
-                                {
-                                    <a asp-action="Tags" asp-route-tag="@tag.Text">#@tag.Text</a>
-                                }
-                            </div>
-                        </div>
-                    </section>
+                    <div class="col-lg-12 col-md-12 m-auto">
+                        <aside class="widget-area text-center" id="secondary">
 
+                            <!-- Tags -->
+                            <section class="widget widget_tag_cloud">
+                                <h3 class="widget-title">Tags</h3>
+                                <div class="post-wrap">
+                                    <div class="tagcloud">
+                                        @foreach (var tag in Model.Tags)
+                                        {
+                                            <a asp-action="Tags" asp-route-tag="@tag.Text">#@tag.Text</a>
+                                        }
+                                    </div>
+                                </div>
+                            </section>
+                        </aside>
+                    </div>
                 </aside>
             </div>
         </div>
