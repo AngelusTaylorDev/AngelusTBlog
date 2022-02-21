@@ -92,6 +92,20 @@
 
 @section Scripts {
 
+
+    <!-- Start tinymce Script -->
+    <script>
+        tinymce.init({
+          selector: 'textarea',
+          plugins: 'a11ychecker advcode casechange export formatpainter image linkchecker autolink lists checklist media mediaembed pageembed permanentpen powerpaste table advtable tinycomments tinymcespellchecker',
+          toolbar: 'a11ycheck addcomment showcomments casechange checklist code export formatpainter pageembed permanentpen table image',
+          toolbar_mode: 'floating',
+          tinycomments_mode: 'embedded',
+          tinycomments_author: 'Angelus Taylor',
+        });
+    </script>
+    <!-- End tinymce Script -->
+
     <!-- Tags JS -->
     <script src="~/js/tags.js"></script>
 

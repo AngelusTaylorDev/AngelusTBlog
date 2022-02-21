@@ -46,6 +46,7 @@
                     <!-- Comment Area -->
                     <div class="comments-area">
                         <h3 class="comments-title" id="commentsSection">@Model.Comments.Count: Comments</h3>
+
                         @foreach (var comment in Model.Comments)
                         {
                             <ol class="comment-list">
@@ -59,25 +60,57 @@
                                             </div>
 
                                             <div class="comment-metadata">
-                                                <a href="#">
-                                                    <span>@comment.Created.ToString("MMM dd, yyyy")</span>
-                                                </a>
+                                                @if (comment.Moderated is not null)
+                                                {
+                                                    <span class="says">
+                                                        <span class="font-weight-bolder">
+                                                            Moderated  <span class="text-danger">@comment.ModerationType.ToString().ToLower()</span>
+                                                        </span>
+                                                        : @comment.Moderated?.ToString("MMM dd, yyyy")
+                                                    </span>
+                                                }
+                                                else
+                                                {
+                                                    <a>
+                                                        <span>@comment.Created.ToString("MMM dd, yyyy")</span>
+                                                    </a>
+                                                }
                                             </div>
                                         </footer>
 
                                         <div class="comment-content">
-                                            <p>@Html.Raw(@comment.CommentBody)</p>
+                                            @if (string.IsNullOrEmpty(comment.CommentBody))
+                                            {
+                                                <span class="small font-italic">Comment not available...</span>
+                                            }
+                                            else if (comment.Moderated is not null)
+                                            {
+                                                <p>@Html.Raw(@comment.ModeratedCommentBody)</p>
+                                            }
+                                            else if (comment.Deleted is null)
+                                            {
+                                                <p>@Html.Raw(@comment.CommentBody)</p>
+                                            }
+
                                         </div>
                                         <div class="row">
+
+                                            <!-- Edit Comment -->
                                             @if (comment.Moderated is null && comment.Deleted is null && comment.AuthorID == userManager.GetUserId(User))
                                             {
                                                 <div class="reply col-1">
-                                                    <a class="comment-reply-link" data-bs-toggle="modal" data-bs-target="#editModal">Edit</a>
+                                                    <a class="comment-reply-link" data-bs-toggle="modal" data-bs-target="#editModal_@comment.Id">Edit</a>
                                                 </div>
                                             }
-                                            <div class="reply col-1">
-                                                <a href="#" class="comment-reply-link">Moderate</a>
-                                            </div>
+                                            <!-- Modorate Comment -->
+                                            @if (User.IsInRole(BlogRoles.Moderators.ToString()) && comment.Deleted is null || User.IsInRole(BlogRoles.Administrator.ToString()) && comment.Deleted is null)
+                                            {
+                                                <div class="reply col-1">
+                                                    <a class="comment-reply-link" data-bs-toggle="modal" data-bs-target="#moderateModal_@comment.Id">
+                                                        Moderate
+                                                    </a>
+                                                </div>
+                                            }
                                         </div>
                                     </div>
 
@@ -111,8 +144,8 @@
                                 </li>
                             </ol>
 
-                            <!-- Editing Modal -->
-                            <div class="modal" id="editModal">
+                            <!-- Editing Comment Modal -->
+                            <div class="modal" id="editModal_@comment.Id">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header text-center">
@@ -123,12 +156,52 @@
                                     <form asp-controller="Comments" asp-action="Edit" class="modal-body mx-3">
                                             @Html.Hidden("Id", comment.Id)
 
-                                            <div class="md-form mb-5">
-                                                <textarea name="commentBody" class="form-control" required>@comment.CommentBody</textarea>
+                                            <div class="md-form mb-2">
+                                                <label class="control-label">Original Comment</label>
+                                                <textarea name="commentBody" class="form-control" required>@Html.Raw(@comment.CommentBody)</textarea>
                                             </div>
 
                                             <div class="reply col-1">
                                                 <button class="default-btn btn-two" type="submit">Save</button>
+                                            </div>
+                                        </form>
+
+                                        <!-- Modal Fotter -->
+                                    <div class="modal-footer">
+                                            <button class="default-btn btn-two" type="button" data-bs-dismiss="modal">Close</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Moderate Comment Modal -->
+                            <div class="modal" id="moderateModal_@comment.Id">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header text-center">
+                                            <h4 class="modal-title w-100 font-weight-bold">ModeRate Comment</h4>
+                                        </div>
+
+                                        <!-- Modal body -->
+                                    <form asp-action="Moderate" asp-controller="Comments" class="modal-body mx-3">
+                                            @Html.Hidden("Id", comment.Id)
+                                            @Html.Hidden("CommentBody", comment.CommentBody)
+
+                                            <div class="form-group md-form mb-2">
+                                                <label class="control-label">Original Comment</label>
+                                                <textarea aria-label="Disabled input example" disabled class="form-control">@comment.CommentBody></textarea>
+                                            </div>
+                                            <div class="form-group md-form mb-2">
+                                                <label class="control-label">Moderate Comment</label>
+                                                <textarea name="ModeratedCommentBody" class="form-control" required>@comment.ModeratedCommentBody</textarea>
+                                            </div>
+                                            <div class="form-group md-form mb-2">
+                                                <label class="control-label">Reason for Moderation</label>
+                                                <select asp-for="@comment.ModerationType" name="ModerationType" asp-items="@Html.GetEnumSelectList<ModerationType>()" class="form-control" required>@comment.CommentBody</select>
+                                            </div>
+
+                                            <div class="form-group reply col-1">
+                                                <button class="default-btn btn-two mt-4" type="submit">Save</button>
                                             </div>
                                         </form>
 
@@ -173,7 +246,7 @@
                 </div>
             </div>
 
-            <div class="col-lg-2 col-md-12">
+            <div class="col-lg-2 col-md-12 mt-5">
                 <aside class="widget-area" id="secondary">
 
                     <div class="col-lg-12 col-md-12 m-auto">
@@ -211,6 +284,10 @@
 
 
 @section Scripts {
+
+
+
+
 
 <!-- Tags JS -->
 <script src="~/js/tags.js"></script>
