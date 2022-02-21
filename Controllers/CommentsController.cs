@@ -60,7 +60,7 @@ namespace AngelusTBlog.Controllers
 
                 _context.Add(comment);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Details", "Posts", new { comment.Post.Slug }, "commentSection");
             }
             ViewData["AuthorID"] = new SelectList(_context.Users, "Id", "Id", comment.AuthorID);
             ViewData["ModeratorID"] = new SelectList(_context.Users, "Id", "Id", comment.ModeratorID);
@@ -187,12 +187,12 @@ namespace AngelusTBlog.Controllers
         // POST: Comments/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(int id, string slug)
         {
             var comment = await _context.Comments.FindAsync(id);
             _context.Comments.Remove(comment);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("Details", "Posts", new { slug }, "commentSection");
         }
 
         private bool CommentExists(int id)

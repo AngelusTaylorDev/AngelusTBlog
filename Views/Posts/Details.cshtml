@@ -94,20 +94,28 @@
 
                                         </div>
                                         <div class="row">
-
                                             <!-- Edit Comment -->
                                             @if (comment.Moderated is null && comment.Deleted is null && comment.AuthorID == userManager.GetUserId(User))
                                             {
-                                                <div class="reply col-1">
-                                                    <a class="comment-reply-link" data-bs-toggle="modal" data-bs-target="#editModal_@comment.Id">Edit</a>
+                                                <div class="reply col-lg-2 d-grid gap-2">
+                                                    <a class="comment-reply-link text-center" data-bs-toggle="modal" data-bs-target="#editModal_@comment.Id">Edit</a>
                                                 </div>
                                             }
                                             <!-- Modorate Comment -->
                                             @if (User.IsInRole(BlogRoles.Moderators.ToString()) && comment.Deleted is null || User.IsInRole(BlogRoles.Administrator.ToString()) && comment.Deleted is null)
                                             {
-                                                <div class="reply col-1">
-                                                    <a class="comment-reply-link" data-bs-toggle="modal" data-bs-target="#moderateModal_@comment.Id">
+                                                <div class="reply col-lg-2 d-grid gap-2">
+                                                    <a class="comment-reply-link text-center" data-bs-toggle="modal" data-bs-target="#moderateModal_@comment.Id">
                                                         Moderate
+                                                    </a>
+                                                </div>
+                                            }
+                                            <!-- Modorate Comment -->
+                                            @if (User.IsInRole(BlogRoles.Moderators.ToString()) && comment.Deleted is null || User.IsInRole(BlogRoles.Administrator.ToString()) && comment.Deleted is null)
+                                            {
+                                                <div class="reply col-lg-2 d-grid gap-2">
+                                                    <a class="comment-reply-link text-center" data-bs-toggle="modal" data-bs-target="#deleteModal_@comment.Id">
+                                                        Delete
                                                     </a>
                                                 </div>
                                             }
@@ -183,13 +191,13 @@
                                         </div>
 
                                         <!-- Modal body -->
-                                    <form asp-action="Moderate" asp-controller="Comments" class="modal-body mx-3">
+                                        <form asp-action="Moderate" asp-controller="Comments" class="modal-body mx-3">
                                             @Html.Hidden("Id", comment.Id)
                                             @Html.Hidden("CommentBody", comment.CommentBody)
 
                                             <div class="form-group md-form mb-2">
                                                 <label class="control-label">Original Comment</label>
-                                                <textarea aria-label="Disabled input example" disabled class="form-control">@comment.CommentBody></textarea>
+                                                <textarea aria-label="Disabled input example" disabled class="form-control">@comment.CommentBody</textarea>
                                             </div>
                                             <div class="form-group md-form mb-2">
                                                 <label class="control-label">Moderate Comment</label>
@@ -212,6 +220,37 @@
                                     </div>
                                 </div>
                             </div>
+
+                            <!-- Delete Comment Modal -->
+                            <div class="modal" id="deleteModal_@comment.Id">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header text-center">
+                                            <h4 class="modal-title w-100 font-weight-bold">Are You Sure You Want To Delete?</h4>
+                                        </div>
+
+                                        <!-- Modal body -->
+                                        <form asp-action="Delete" asp-controller="Comments" class="modal-body mx-3">
+                                            @Html.Hidden("Id", comment.Id)
+                                            @Html.Hidden("Slug", comment.Post.Slug)
+
+                                            <div class="md-form mb-2">
+                                                <label class="control-label">Original Comment</label>
+                                                <textarea aria-label="Disabled input example" disabled class="form-control">@comment.CommentBody</textarea>
+                                            </div>
+
+                                            <div class="reply col-1">
+                                                <button class="default-btn btn-two" type="submit">Delete</button>
+                                            </div>
+                                        </form>
+
+                                        <!-- Modal Fotter -->
+                                        <div class="modal-footer">
+                                            <button class="default-btn btn-two" type="button" data-bs-dismiss="modal">Close</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         }
 
                         <hr />
@@ -229,7 +268,7 @@
                                         <textarea name="commentBody" cols="45" rows="5" maxlength="65525"></textarea>
                                     </p>
                                     <p class="form-submit">
-                                        <input type="submit" class="submit" value="Post A Comment">
+                                        <input type="submit" class="submit" value="Post A Comment" />
                                     </p>
                                 </form>
                             </div>
@@ -257,9 +296,9 @@
                                 <h3 class="widget-title">Tags</h3>
                                 <div class="post-wrap">
                                     <div class="tagcloud">
-                                        @foreach (var tag in Model.Tags)
+                                        @foreach (var tag in Model.Tags.ToList())
                                         {
-                                            <a asp-action="Tags" asp-route-tag="@tag.Text">#@tag.Text</a>
+                                            <a href="">#@tag.Text</a>
                                         }
                                     </div>
                                 </div>

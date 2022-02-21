@@ -1,0 +1,54 @@
+﻿@using AngelusTBlog.Services
+@using AngelusTBlog.Models
+@inject IImageService imageService
+@model IEnumerable<Tag>
+
+@{
+    ViewData["Title"] = "All Tags";
+}
+
+
+<!-- Start Search Area -->
+<section class="latest-project-area pb-70">
+    <div class="container">
+        <div class="section-title text-center">
+            <h2 class="p-3 mt-4">@ViewData["Title"]</h2>
+        </div>
+        <div class="row">
+            @foreach (var tag in Model)
+            {
+                <div class="card col-lg-3 col-md-6 m-2" style="width: 25rem;">
+                    <div class="single-featured p-4">
+                        <a href="post-style-one.html">
+                            <img class="card-img-top blogImage" src="@imageService.DecodeImage(tag.Post.ImageData, tag.Post.ImageType)" alt="Image">
+                        </a>
+                        <div class="card-body">
+                            <div class="featured-content">
+                                <ul>
+                                    <li>
+                                        <a asp-action="Details" asp-route-id="@tag..AuthorID" class="admin">
+                                            <i class="bx bx-user"></i>
+                                            @Html.DisplayFor(modelItem => tag.Post.Author.FirstName)
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <i class="bx bx-calendar"></i>
+                                        @tag.Post.Created.ToString("MMM dd, yyyy")
+                                    </li>
+                                </ul>
+
+                                <a class="card-title" asp-action="Details" asp-route-slug="@tag.Post.Slug">
+                                    <h5>@tag.Post.Title</h5>
+                                </a>
+
+                                <p class="card-text">@Html.Raw(@tag.Post.Summary)</p>
+                                <a class="read-more" asp-action="Details" asp-route-slug="@tag.Post.Slug">Read More</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+<!-- End Search Area -->

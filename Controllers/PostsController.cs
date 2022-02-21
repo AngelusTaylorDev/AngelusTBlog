@@ -78,6 +78,30 @@ namespace AngelusTBlog.Controllers
             return View(posts);
         }
 
+        // TagIndex
+        public async Task<IActionResult> TagIndex(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var tag = await _context.Tags
+                .Include(t => t.Author)
+                .Include(t => t.Post)
+                .Include(t => t.Id)
+                .Include(t => t.Text)
+                .Include(t => t.PostId)
+                .FirstOrDefaultAsync(m => m.Id == id);
+
+            if (tag == null)
+            {
+                return NotFound();
+            }
+
+            return View(tag);
+        }
+
         // GET: Posts/Details/5
         public async Task<IActionResult> Details(string slug)
         {
@@ -163,6 +187,12 @@ namespace AngelusTBlog.Controllers
                 if (VallidationError)
                 {
                     ViewData["BlogId"] = new SelectList(_context.Blogs, "Id", "Name", post.BlogId);
+                    return View(post);
+                }
+
+                if (VallidationError)
+                {
+                    ViewData["TagValues"] = string.Join(",", tagValues);
                     return View(post);
                 }
 

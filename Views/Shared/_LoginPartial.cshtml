@@ -17,13 +17,11 @@
     }
     else
     {
-        <di class="row">
-            <div class="col-lg-2 align-self-end">
-                <a class="nav-item" asp-area="Identity" asp-page="/Account/Register">Register</a>
-            </div>
-            <div class="col-lg-2 align-self-center">
-                <a class="nav-item " asp-area="Identity" asp-page="/Account/Login">Login</a>
-            </div>
-        </di>
+        
+        <div class="d-grid gap-8 d-md-block fw-bold">
+            <button class="btn btn-warning btn-sm">
+                <a asp-area="Identity" asp-page="/Account/Login"><h5>Login</h5>  </a>
+            </button>
+        </div>
     }
 </div>
