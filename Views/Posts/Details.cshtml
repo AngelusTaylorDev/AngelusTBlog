@@ -265,7 +265,7 @@
                                     @Html.Hidden("PostId", Model.Id)
                                     <p class="comment-form-comment">
                                         <label>Comment</label>
-                                        <textarea name="commentBody" cols="45" rows="5" maxlength="65525"></textarea>
+                                        <textarea name="commentBody" cols="45" rows="5" minlength="9" maxlength="65525" required ></textarea>
                                     </p>
                                     <p class="form-submit">
                                         <input type="submit" class="submit" value="Post A Comment" />

@@ -24,6 +24,7 @@ namespace AngelusTBlog.Controllers
         }
 
         // GET: Comments all Comments: GET: Comments/Details/5
+        [Authorize(Roles = "Administrator,Moderators")]
         public async Task<IActionResult> Index()
         {
             var allComments = await _context.Comments.ToListAsync();
@@ -38,6 +39,7 @@ namespace AngelusTBlog.Controllers
         }
 
         // GET: Comments all the Moderated Comments
+        [Authorize(Roles = "Administrator,Moderators")]
         public async Task<IActionResult> ModeratedIndex()
         {
             var moderatedIndex = _context.Comments.Where(c => c.Moderated != null).ToListAsync();
@@ -47,7 +49,6 @@ namespace AngelusTBlog.Controllers
         // POST: Comments/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize]
         public async Task<IActionResult> Create([Bind("PostId,CommentBody")] Comment comment)
         {
             if (ModelState.IsValid)
@@ -60,7 +61,7 @@ namespace AngelusTBlog.Controllers
 
                 _context.Add(comment);
                 await _context.SaveChangesAsync();
-                return RedirectToAction("Details", "Posts", new { comment.Post.Slug }, "commentSection");
+                return RedirectToAction("SearchIndex", "Posts");
             }
             ViewData["AuthorID"] = new SelectList(_context.Users, "Id", "Id", comment.AuthorID);
             ViewData["ModeratorID"] = new SelectList(_context.Users, "Id", "Id", comment.ModeratorID);
@@ -69,6 +70,7 @@ namespace AngelusTBlog.Controllers
         }
 
         // GET: Comments/Edit/5
+        [Authorize(Roles = "Administrator,Moderators")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -126,6 +128,7 @@ namespace AngelusTBlog.Controllers
         // POST: Comments/Moderate/5
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrator,Moderators")]
         public async Task<IActionResult> Moderate(int id, [Bind("Id,CommentBody,ModeratedCommentBody,ModerationType")] Comment comment)
         {
             if (id != comment.Id)
@@ -165,6 +168,7 @@ namespace AngelusTBlog.Controllers
         }
 
         // GET: Comments/Delete/5
+        [Authorize(Roles = "Administrator,Moderators")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -187,6 +191,7 @@ namespace AngelusTBlog.Controllers
         // POST: Comments/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrator,Moderators")]
         public async Task<IActionResult> DeleteConfirmed(int id, string slug)
         {
             var comment = await _context.Comments.FindAsync(id);

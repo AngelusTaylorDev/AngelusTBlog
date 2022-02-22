@@ -28,6 +28,7 @@ namespace AngelusTBlog.Controllers
         }
 
         // GET: Blogs - Get all the blogs list them and turn them into the viw 
+        [Authorize(Roles = "Administrator,Moderators")]
         public async Task<IActionResult> Index()
         {
             var applicationDbContext = _context.Blogs.Include(b => b.Author);
@@ -72,6 +73,7 @@ namespace AngelusTBlog.Controllers
         // Then post it to the DB.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrator,Moderators")]
         public async Task<IActionResult> Create([Bind("id,Name,Description,Image,AuthorId")] Blog blog)
         {
             if (ModelState.IsValid)
@@ -98,7 +100,7 @@ namespace AngelusTBlog.Controllers
         }
 
         // GET: Blogs/Edit/5
-        [Authorize]
+        [Authorize(Roles = "Administrator,Moderators")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -172,7 +174,7 @@ namespace AngelusTBlog.Controllers
         }
 
         // GET: Blogs/Delete/5
-        [Authorize]
+        [Authorize(Roles = "Administrator,Moderators")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -194,6 +196,7 @@ namespace AngelusTBlog.Controllers
         // POST: Blogs/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrator,Moderators")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var blog = await _context.Blogs.FindAsync(id);

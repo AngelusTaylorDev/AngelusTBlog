@@ -52,6 +52,7 @@ namespace AngelusTBlog.Controllers
         }
 
         // GET: Posts
+        [Authorize(Roles = "Administrator,Moderators")]
         public async Task<IActionResult> Index()
         {
             var applicationDbContext = _context.Posts.Include(p => p.Author);
@@ -76,30 +77,6 @@ namespace AngelusTBlog.Controllers
                 .ToPagedListAsync(pageNumber, pageSize);
 
             return View(posts);
-        }
-
-        // TagIndex
-        public async Task<IActionResult> TagIndex(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var tag = await _context.Tags
-                .Include(t => t.Author)
-                .Include(t => t.Post)
-                .Include(t => t.Id)
-                .Include(t => t.Text)
-                .Include(t => t.PostId)
-                .FirstOrDefaultAsync(m => m.Id == id);
-
-            if (tag == null)
-            {
-                return NotFound();
-            }
-
-            return View(tag);
         }
 
         // GET: Posts/Details/5
@@ -128,7 +105,7 @@ namespace AngelusTBlog.Controllers
         }
 
         // GET: Posts/Create
-        [Authorize]
+        [Authorize(Roles = "Administrator,Moderators")]
         public IActionResult Create()
         {
             ViewData["BlogId"] = new SelectList(_context.Blogs, "Id", "Name");
@@ -139,6 +116,7 @@ namespace AngelusTBlog.Controllers
         // POST: Posts/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrator,Moderators")]
         public async Task<IActionResult> Create([Bind("id,BlogId,Title,Summary,Content,ReadyStatus,Slug,Image")] Post post, List<string> tagValues)
         {
             if (ModelState.IsValid)
@@ -223,7 +201,7 @@ namespace AngelusTBlog.Controllers
         }
 
         // GET: Posts/Edit/5
-        [Authorize]
+        [Authorize(Roles = "Administrator,Moderators")]
         public async Task<IActionResult> Edit(string slug)
         {
             if (string.IsNullOrEmpty(slug))
@@ -244,6 +222,7 @@ namespace AngelusTBlog.Controllers
         // POST: Posts/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrator,Moderators")]
         public async Task<IActionResult> Edit(int id, [Bind("Id,BlogId,Title,Summary,Content,ReadyStatus,Image,Created")] Post post, IFormFile newImage, List<string> tagValues)
         {
             if (id != post.Id)
@@ -343,7 +322,7 @@ namespace AngelusTBlog.Controllers
         }
 
         // GET: Posts/Delete/5
-        [Authorize]
+        [Authorize(Roles = "Administrator,Moderators")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -365,6 +344,7 @@ namespace AngelusTBlog.Controllers
         // POST: Posts/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrator,Moderators")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var post = await _context.Posts.FindAsync(id);

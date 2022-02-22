@@ -56,7 +56,7 @@ namespace AngelusTBlog.Controllers
             // Where we will be sending the email
             model.Message = $"{model.Message} </hr> {model.Phone}";
             await _emailSender.SendContactEmailAsync(model.Email, model.Name, model.Subject, model.Message);
-            return RedirectToAction("Index");
+            return RedirectToAction("Contact");
         }
 
         public IActionResult Privacy()

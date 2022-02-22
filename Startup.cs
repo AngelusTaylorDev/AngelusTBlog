@@ -30,10 +30,10 @@ namespace AngelusTBlog
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            // Useing UseNpgsql to Build and connect the Backend
+            // Useing UseNpgsql to Build and connect the Backend - using the ConnectionService to connect to the DB
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseNpgsql(
-                    Configuration.GetConnectionString("DefaultConnection")));
+                options.UseNpgsql(ConnectionService.GetConnectionString(Configuration)));
+            //options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
             services.AddDatabaseDeveloperPageExceptionFilter();
 
             // Adding the BlogUser Identity Role
