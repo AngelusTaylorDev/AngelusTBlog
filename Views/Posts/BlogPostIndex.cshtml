@@ -22,7 +22,7 @@
             {
                 <div class="card col-lg-3 col-md-6 m-2" style="width: 25rem;">
                     <div class="single-featured p-4">
-                        <a href="post-style-one.html">
+                        <a asp-action="Details" asp-route-slug="@post.Slug">
                             <img class="card-img-top blogImage" src="@imageService.DecodeImage(post.ImageData, post.ImageType)" alt="Image">
                         </a>
                         <div class="card-body">
